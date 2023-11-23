@@ -3,7 +3,7 @@
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title> Quasar App </q-toolbar-title>
-        <p class="q-mr-sm">Wydałeś {{ expensesCount }}</p>
+        <span class="q-mr-sm row align-center">Wydałeś:  <strong>{{ expensesCount }}</strong></span>
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>

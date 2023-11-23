@@ -22,7 +22,7 @@
     </div>
 
     <q-list class="q-mt-md" bordered separator>
-      <q-item v-for="(expense, index) in expenses" :key="index">
+      <q-item class="row justify-between" v-for="(expense, index) in expenses" :key="index">
         {{ expense.category }} {{ expense.expense }}
         <q-btn @click="deleteExpense(expense.id)">Usuń</q-btn>
       </q-item>
@@ -32,7 +32,7 @@
 
 <script setup>
 import axios from "axios";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useQuasar } from "quasar";
 import AddCategory from "src/components/AddCategory.vue";
 const API_URL = "http://localhost:5038/";
