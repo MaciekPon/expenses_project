@@ -5,14 +5,8 @@
     </div>
 
     <div class="q-mt-md">
-      <q-select
-        v-model="category"
-        :options="categories"
-        option-label="name"
-        option-value="name"
-        emit-value
-        label="Wybierz kategorie"
-      />
+      <q-select v-model="category" :options="categories" option-label="name" option-value="name" emit-value
+        label="Wybierz kategorie" />
     </div>
 
     <div class="q-mt-md">
@@ -35,7 +29,6 @@ import axios from "axios";
 import { ref, onMounted, computed } from "vue";
 import { useQuasar } from "quasar";
 import AddCategory from "src/components/AddCategory.vue";
-const API_URL = "http://localhost:5038/";
 
 const $q = useQuasar();
 const expenses = ref([]);
@@ -54,7 +47,7 @@ const addCategory = () => {
   })
     .onOk((payload) => {
       axios
-        .post(`${API_URL}api/new-category`, { name: payload.newCategory })
+        .post(`${import.meta.env.VITE_LOCAL}api/new-category`, { name: payload.newCategory })
         .then((response) => {
           refreshData(true);
         });
@@ -70,11 +63,11 @@ const addCategory = () => {
 
 async function refreshData(category) {
   if (!category) {
-    await axios.get(API_URL + "api/expenses").then((response) => {
+    await axios.get(import.meta.env.VITE_LOCAL + "api/expenses").then((response) => {
       expenses.value = response.data;
     });
   } else {
-    await axios.get(API_URL + "api/categories").then((response) => {
+    await axios.get(import.meta.env.VITE_LOCAL + "api/categories").then((response) => {
       categories.value = response.data;
     });
   }
@@ -86,7 +79,7 @@ async function addToExpenses() {
     category: category.value,
   };
 
-  await axios.post(`${API_URL}api/add-expense`, result).then((response) => {
+  await axios.post(`${import.meta.env.VITE_LOCAL}api/add-expense`, result).then((response) => {
     refreshData();
     alert(response.data);
   });
@@ -95,7 +88,7 @@ async function addToExpenses() {
 }
 
 async function deleteExpense(id) {
-  await axios.delete(`${API_URL}api/delete?id=${id}`).then((response) => {
+  await axios.delete(`${import.meta.env.VITE_LOCAL}api/delete?id=${id}`).then((response) => {
     refreshData();
     alert(response.data);
   });

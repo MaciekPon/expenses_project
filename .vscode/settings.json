@@ -2,7 +2,7 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "Vue.volar",
   "editor.codeActionsOnSave": [
     "source.fixAll.eslint"
   ],
@@ -11,5 +11,5 @@
     "javascriptreact",
     "typescript",
     "vue"
-  ]
+  ],
 }

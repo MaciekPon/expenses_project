@@ -3,7 +3,7 @@
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title> Quasar App </q-toolbar-title>
-        <span class="q-mr-sm row align-center">Wydałeś:  <strong>{{ expensesCount }}</strong></span>
+        <span class="q-mr-sm row align-center">Wydałeś: <strong>{{ expensesCount }}</strong></span>
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
@@ -19,10 +19,9 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 const expensesCount = ref(0);
-const API_URL = "http://localhost:5038/";
 
 onMounted(async () => {
-  await axios.get(`${API_URL}api/expenses`).then((response) => {
+  await axios.get(`${import.meta.env.VITE_LOCAL}api/expenses`).then((response) => {
     response.data.map(
       (item) => (expensesCount.value += parseInt(item.expense))
     );
