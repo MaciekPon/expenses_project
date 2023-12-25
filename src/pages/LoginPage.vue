@@ -18,7 +18,7 @@ import { ref } from "vue";
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-
+const connectWithApi = import.meta.env.VITE_LOCAL || "http://ec2-13-51-107-19.eu-north-1.compute.amazonaws.com:3000/"
 const username = ref('')
 const password = ref('')
 
@@ -28,7 +28,7 @@ const authorization = () => {
         password: password.value
     }
 
-    axios.post(`${import.meta.env.VITE_LOCAL}api/login`, { result })
+    axios.post(`${connectWithApi}api/login`, { result })
         .then((response) => {
             if (response.data) {
                 router.push({ path: '/home' })

@@ -36,6 +36,8 @@ const expense = ref(0);
 const category = ref("");
 const showAlert = ref(false);
 const categories = ref([]);
+const connectWithApi = import.meta.env.VITE_LOCAL || "http://ec2-13-51-107-19.eu-north-1.compute.amazonaws.com:3000/"
+
 
 const addCategory = () => {
   showAlert.value = true;
@@ -47,7 +49,7 @@ const addCategory = () => {
   })
     .onOk((payload) => {
       axios
-        .post(`${import.meta.env.VITE_LOCAL}api/new-category`, { name: payload.newCategory })
+        .post(`${connectWithApi}api/new-category`, { name: payload.newCategory })
         .then((response) => {
           refreshData(true);
         });
@@ -63,11 +65,11 @@ const addCategory = () => {
 
 async function refreshData(category) {
   if (!category) {
-    await axios.get(import.meta.env.VITE_LOCAL + "api/expenses").then((response) => {
+    await axios.get(connectWithApi + "api/expenses").then((response) => {
       expenses.value = response.data;
     });
   } else {
-    await axios.get(import.meta.env.VITE_LOCAL + "api/categories").then((response) => {
+    await axios.get(connectWithApi + "api/categories").then((response) => {
       categories.value = response.data;
     });
   }
@@ -79,7 +81,7 @@ async function addToExpenses() {
     category: category.value,
   };
 
-  await axios.post(`${import.meta.env.VITE_LOCAL}api/add-expense`, result).then((response) => {
+  await axios.post(`${connectWithApi}api/add-expense`, result).then((response) => {
     refreshData();
     alert(response.data);
   });
@@ -88,7 +90,7 @@ async function addToExpenses() {
 }
 
 async function deleteExpense(id) {
-  await axios.delete(`${import.meta.env.VITE_LOCAL}api/delete?id=${id}`).then((response) => {
+  await axios.delete(`${connectWithApi}api/delete?id=${id}`).then((response) => {
     refreshData();
     alert(response.data);
   });

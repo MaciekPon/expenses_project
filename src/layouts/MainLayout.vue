@@ -19,9 +19,10 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 const expensesCount = ref(0);
+const connectWithApi = import.meta.env.VITE_LOCAL || "http://ec2-13-51-107-19.eu-north-1.compute.amazonaws.com:3000/"
 
 onMounted(async () => {
-  await axios.get(`${import.meta.env.VITE_LOCAL}api/expenses`).then((response) => {
+  await axios.get(`${connectWithApi}api/expenses`).then((response) => {
     response.data.map(
       (item) => (expensesCount.value += parseInt(item.expense))
     );
