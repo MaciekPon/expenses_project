@@ -18,7 +18,7 @@ import { ref } from "vue";
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const connectWithApi = import.meta.env.VITE_LOCAL || "http://ec2-13-51-107-19.eu-north-1.compute.amazonaws.com:3000/"
+const connectWithApi = import.meta.env.VITE_LOCAL || "http://ec2-13-53-38-214.eu-north-1.compute.amazonaws.com:3000/"
 const username = ref('')
 const password = ref('')
 
